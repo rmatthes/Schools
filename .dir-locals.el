@@ -1,7 +1,7 @@
 ((coq-mode
   . ((eval . 
 	   (let* ((Workshops-topdir (expand-file-name (locate-dominating-file buffer-file-name ".dir-locals.el")))
-		  (unimath-topdir (concat Workshops-topdir "UniMath/")))
+		  (unimath-topdir (concat Workshops-topdir "../")))
 	     (setq fill-column 100)
 	     (make-local-variable 'coq-use-project-file)
 	     (setq coq-use-project-file nil)
@@ -9,10 +9,11 @@
 	     (setq coq-prog-args `("-emacs" "-noinit" "-indices-matter" "-type-in-type"
 				   "-w" "-notation-overridden,-local-declaration,+uniform-inheritance,-deprecated-option"
 				   "-Q" ,(concat unimath-topdir "UniMath") "UniMath"
+				   "-R" ,(concat unimath-topdir "_build/default/UniMath") "UniMath"
 				   "-R" "." "Top"
 				   ))
 	     (make-local-variable 'coq-prog-name)
-	     (setq coq-prog-name (concat unimath-topdir "sub/coq/bin/coqtop"))
+	     ;; (setq coq-prog-name (concat unimath-topdir "sub/coq/bin/coqtop"))
 	     (make-local-variable 'before-save-hook)
 	     (add-hook 'before-save-hook 'delete-trailing-whitespace)
 	     (modify-syntax-entry ?' "w")
